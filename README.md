@@ -3,10 +3,14 @@ peregrine cms developer toolbox
 
 in case you want to work on peregrine but only have docker (desktop) installed on your computer (no java, maven)
 
-## install the first time
+## Build an image compatible with your local right
 
 ```
-docker pull peregrinecms/peregrine-toolbox
+git clone https://github.com/Mayeu/peregrine-toolbox-explore/
+docker build docker build \
+          --build-arg HOST_UID=$(id -u) \
+          --build-arg HOST_USER=$(whoami) \
+          -t local-peregrine-toolbox .
 ```
 
 create an emppty folder somewhere on your computer and change your directory into it
@@ -16,18 +20,18 @@ mkdir peregrine
 cd peregrine
 ```
 
-then run the docker image: 
+then run the docker image you just created: 
 
 - windows: 
 
 ```
-docker run -it -p 8080:8080 -v "%CD%:/peregrine" peregrinecms/peregrine-toolbox
+docker run -it -p 8080:8080 -v "%CD%:/peregrine" local-peregrine-toolbox
 ```
 
 - other platforms
 
 ```
-docker run -it -p 8080:8080 -v $(PWD):/peregrine peregrinecms/peregrine-toolbox
+docker run -it -p 8080:8080 -v $(PWD):/peregrine local-peregrine-toolbox
 ```
 
 you should get a shell 
@@ -54,7 +58,7 @@ If you exit out of the shell peregrine is stopped
 To run peregrine again just go the folder you created in the beginning and execute
 
 ```
-docker run -it -p 8080:8080 -v $(PWD):/peregrine peregrinecms/peregrine-toolbox
+docker run -it -p 8080:8080 -v $(PWD):/peregrine local-peregrine-toolbox
 ```
 
 in the resulting shell you can then run
@@ -64,5 +68,3 @@ start-peregrine.sh
 ```
 
 to startup peregrine again and open your browser at http://localhost:8080/
-
-

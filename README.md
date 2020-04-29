@@ -7,7 +7,7 @@ in case you want to work on peregrine but only have docker (desktop) installed o
 
 ```
 git clone https://github.com/Mayeu/peregrine-toolbox-explore/
-docker build docker build \
+docker build \
           --build-arg HOST_UID=$(id -u) \
           --build-arg HOST_USER=$(whoami) \
           -t local-peregrine-toolbox .
